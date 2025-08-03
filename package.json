@@ -1,0 +1,59 @@
+{
+  "name": "log-translator",
+  "displayName": "Log Translator",
+  "description": "翻译匹配日志行为可读中文",
+  "version": "1.0.1",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "activationEvents": [
+    "onCommand:logTranslator.translateLogToFile",
+    "onCommand:logTranslator.updateKeywords"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "logTranslator.translateLogToFile",
+        "title": "翻译日志到文件"
+      },
+      {
+        "command": "logTranslator.updateKeywords",
+        "title": "手动更新关键词"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "logTranslator.translateLogToFile",
+          "when": "resourceExtname == .txt",
+          "group": "navigation"
+        },
+        {
+          "command": "logTranslator.updateKeywords",
+          "when": "resourceExtname == .txt",
+          "group": "navigation"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Log Translator 设置",
+      "properties": {
+        "logTranslator.keywordUrl": {
+          "type": "string",
+          "default": "https://example.com/keywords.json",
+          "description": "关键词配置文件远程地址"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^24.1.0",
+    "@types/vscode": "^1.60.0",
+    "typescript": "^4.4.3",
+    "vscode": "^1.1.37"
+  }
+}

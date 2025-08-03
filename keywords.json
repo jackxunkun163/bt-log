@@ -1,0 +1,14 @@
+[
+  {
+    "pattern": "audio_check_.*readyentered",
+    "description": "进入 A2DP 准备检查"
+  },
+  {
+    "pattern": "bt_stack_init",
+    "description": "蓝牙协议栈初始化"
+  },
+  {
+    "pattern": "connection lost",
+    "description": "连接丢失"
+  }
+]
