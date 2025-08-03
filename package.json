@@ -3,6 +3,7 @@
   "displayName": "Log Translator",
   "description": "翻译匹配日志行为可读中文",
   "version": "1.0.1",
+  "license": "MIT",
   "engines": {
     "vscode": "^1.60.0"
   },
@@ -55,5 +56,10 @@
     "@types/vscode": "^1.60.0",
     "typescript": "^4.4.3",
     "vscode": "^1.1.37"
-  }
+  },
+  "repository": {
+  "type": "git",
+  "url": "https://github.com/jackxunkun163/bt-log"
+}
+
 }

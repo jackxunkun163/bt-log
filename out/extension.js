@@ -84,20 +84,6 @@ function fetchKeywordsFromURL(url) {
         });
     });
 }
-async function loadPatterns(remoteUrl, context) {
-    try {
-        const raw = await fetchKeywordsFromURL(remoteUrl);
-        patterns = raw.map(entry => ({
-            ...entry,
-            regex: new RegExp(entry.pattern, 'i')
-        }));
-        vscode.window.showInformationMessage('关键词已从远程加载');
-    }
-    catch (err) {
-        vscode.window.showWarningMessage('远程关键词加载失败，使用本地默认配置');
-        loadPatternsFromLocal(context);
-    }
-}
 async function loadPatternsFromRemote(remoteUrl, context) {
     try {
         const raw = await fetchKeywordsFromURL(remoteUrl);
