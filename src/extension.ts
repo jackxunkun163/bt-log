@@ -15,7 +15,7 @@ export function activate(context: vscode.ExtensionContext) {
   const config = vscode.workspace.getConfiguration('logTranslator');
   const remoteUrl = config.get<string>('keywordUrl') || '';
 
-  loadPatterns(remoteUrl, context);
+  loadPatternsFromRemote(remoteUrl, context);
 
   context.subscriptions.push(
     vscode.commands.registerCommand('logTranslator.translateLogToFile', async () => {
@@ -51,7 +51,7 @@ export function activate(context: vscode.ExtensionContext) {
     }),
 
     vscode.commands.registerCommand('logTranslator.updateKeywords', async () => {
-      await loadPatterns(remoteUrl, context);
+      await loadPatternsFromRemote(remoteUrl, context);
     })
   );
 }
@@ -85,6 +85,26 @@ async function loadPatterns(remoteUrl: string, context: vscode.ExtensionContext)
     vscode.window.showInformationMessage('关键词已从远程加载');
   } catch (err: any) {
     vscode.window.showWarningMessage('远程关键词加载失败，使用本地默认配置');
+    loadPatternsFromLocal(context);
+  }
+}
+async function loadPatternsFromRemote(remoteUrl: string, context: vscode.ExtensionContext) {
+  try {
+    const raw = await fetchKeywordsFromURL(remoteUrl);
+
+    // 写入本地文件（覆盖 keywords.json）
+    const localPath = path.join(context.extensionPath, 'keywords.json');
+    fs.writeFileSync(localPath, JSON.stringify(raw, null, 2), 'utf-8');
+
+    // 编译正则表达式
+    patterns = raw.map(entry => ({
+      ...entry,
+      regex: new RegExp(entry.pattern, 'i')
+    }));
+
+    vscode.window.showInformationMessage('关键词已从远程加载并保存到本地');
+  } catch (err: any) {
+    vscode.window.showWarningMessage('远程关键词加载失败，将使用本地默认配置');
     loadPatternsFromLocal(context);
   }
 }
