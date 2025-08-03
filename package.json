@@ -41,7 +41,7 @@
       "properties": {
         "logTranslator.keywordUrl": {
           "type": "string",
-          "default": "https://example.com/keywords.json",
+          "default": "https://raw.githubusercontent.com/jackxunkun163/bt-log/refs/heads/main/keywords.json",
           "description": "关键词配置文件远程地址"
         }
       }
