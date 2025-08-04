@@ -25,16 +25,33 @@ export function activate(context: vscode.ExtensionContext) {
       const lines = editor.document.getText().split(/\r?\n/);
       const matches: string[] = [];
 
+      //for (const line of lines) {
+        //for (const entry of patterns) {
+          //if (entry.regex.test(line)) {
+            //matches.push(`[翻译说明] ${entry.description}`);
+            //matches.push(`[原始日志] ${line}`);
+            //matches.push('');
+            //break;
+          //}
+        //}
+      //}
+      
       for (const line of lines) {
         for (const entry of patterns) {
-          if (entry.regex.test(line)) {
-            matches.push(`[翻译说明] ${entry.description}`);
-            matches.push(`[原始日志] ${line}`);
-            matches.push('');
-            break;
-          }
+          const match = entry.regex.exec(line);
+          if (match) {
+            // 替换 $1、$2... 为正则分组值
+            const descriptionWithParams = entry.description.replace(/\$(\d+)/g, (_, index) => {
+              return match[parseInt(index)] ?? '';
+            });
+
+          matches.push(`[翻译说明] ${descriptionWithParams}`);
+          matches.push(`[原始日志] ${line}`);
+          matches.push('');
+          break;
         }
       }
+    }
 
       if (matches.length === 0) {
         vscode.window.showInformationMessage('未找到匹配的日志行');
