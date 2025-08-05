@@ -27,12 +27,12 @@
       "editor/context": [
         {
           "command": "logTranslator.translateLogToFile",
-          "when": "resourceExtname == .txt",
+          "when": "editorTextFocus",
           "group": "navigation"
         },
         {
           "command": "logTranslator.updateKeywords",
-          "when": "resourceExtname == .txt",
+          "when": "editorTextFocus",
           "group": "navigation"
         }
       ]
