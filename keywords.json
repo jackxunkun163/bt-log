@@ -304,7 +304,148 @@
 	"description": "AvailablePairDeviceGroupController 页面的状态"
  },
  {
-	"pattern": "BluetoothAdapter: startDiscovery\\(\\) called by (?P<caller>\\S+)",
-	"description": "蓝牙开始startDiscovery，调用者是（${caller}）"
- }
+	"pattern": "BluetoothAdapter: startDiscovery\\(\\) called by (\\S+)",
+	"description": "蓝牙开始startDiscovery，调用者是 [$1]"
+ },
+ {
+	"pattern": "BluetoothAdapterService: startDiscovery: from uid/pid=(\\d+)/(\\d+)",
+	"description": "蓝牙开始 startDiscovery，Uid 为 [$1]，Pid 为 [$2]"
+ },
+ {
+	"pattern": "BluetoothServiceJni: .*startDiscoveryNative",
+	"description": "JNI 层调用 startDiscoveryNative 开始设备发现"
+ },
+ {
+	"pattern": "bt_btif_dm: .*btif_dm_start_discovery: start device discover/inquiry",
+	"description": "btif 层开始执行设备发现流程"
+ },
+ {
+	"pattern": "bta_dm_search_sm_execute: state:([A-Z_]+), event:([A-Z_]+)\\[0x[0-9a-fA-F]+\\]",
+	"description": "bta层设备搜索状态机执行，当前状态为 [$1]，事件为 [$2]"
+ },
+ {
+	"pattern": "bta_dm_search_set_state: search_state\\((\\d+)\\)->\\((\\d+)\\)",
+	"description": "bta层设置设备搜索状态，从 [$1] 切换为 [$2]"
+ },
+ {
+	"pattern": "BTM_StartInquiry: Starting device discovery inq_active:(0x[\\da-fA-F]+)",
+	"description": "BTM层开始设备发现，inq_active 状态为 [$1]"
+ },
+ {
+	"pattern": "btm_ble_start_inquiry",
+	"description": "BTM层ble 开始 inquiry"
+ },
+ {
+	"pattern": "transmit_command: Sending command ([A-Z_]+)\\((0x[0-9a-fA-F]+)\\)",
+	"description": "发送 HCI 命令 [$1]，opcode 为 [$2]"
+ },
+ {
+	"pattern": "OnTransmitPacketCommandComplete: Received cmd complete for ([A-Z_]+)\\((0x[0-9a-fA-F]+)\\)",
+	"description": "收到HCI 命令 [$1]（opcode=[$2]）的 Command Complete Event"
+ },
+ {
+	"pattern": "operator\\(\\): HAL bt_hal_cbacks->(\\w+)_cb",
+	"description": "stack调用 HAL 层回调函数 [$1_cb]"
+ },
+ {
+	"pattern": "discovery_state_changed_callback: DiscoveryState:(\\d)",
+	"description": "discovery状态变化为 [$1]（1 表示开始，0 表示停止）"
+ },
+ {
+	"pattern": "BluetoothEnabler: state: (\\d+)",
+	"description": "BluetoothEnabler 状态变更为 [$1](STATE_TURNING_ON)"
+ },
+ {
+	"pattern": "btif_set_adapter_property",
+	"description": "btif层设置property"
+ },
+ {
+	"pattern": "BTM_SetDiscoverability: mode (\\d+) \\[NonDisc-\\d+, Lim-\\d+, Gen-\\d+\\]",
+	"description": "设置蓝牙可发现模式为 [$1]（0=不可发现，1=限制可发现，2=完全可发现）"
+ },
+ {
+	"pattern": "btm_ble_set_connectability: mode=0x(\\d+) combined_mode=0x(\\d+)",
+	"description": "设置ble 可连接性，mode=0x[$1]，combined_mode=0x[$2]"
+ },
+ {
+	"pattern": "BTM_SetConnectability: mode=(\\d+) \\[NonConn-\\d+, Conn-\\d+\\], page scan interval=\\((\\d+) \\* 0\\.625\\)ms",
+	"description": "设置蓝牙连接模式，mode=[$1]，页面扫描间隔=[$2 * 0.625]ms"
+ },
+ {
+	"pattern": "btif_dm_search_devices_evt: addr:([0-9a-f:]+) device_type=0x([0-9a-f]+)",
+    "description": "inquiry发现蓝牙设备，地址=[$1]，类型=[$2]"
+ },
+ {
+    "pattern": "Unable to find service uuids in EIR peer:([0-9a-f:]+)",
+    "description": "inquiry设备 [$1] 的 EIR 数据中未找到服务 UUID"
+ },
+ {
+    "pattern": "btif_dm_search_devices_evt: ([0-9a-f:]+) CoD: 0x[0-9a-fA-F]+ -> 0x([0-9a-fA-F]+)",
+    "description": "inquiry设备 [$1] 的 CoD（Class of Device）被更新为 0x[$2]"
+ },
+ {
+    "pattern": "btif_dm_search_devices_evt: clock_offset is (0x[0-9a-fA-F]+)",
+    "description": "inquiry记录时钟偏移量：[$1]"
+ },
+ {
+	"pattern": "interop_mtk_match_addr: Device is a match for interop workaround ([a-zA-Z0-9]+)\\.",
+	"description": "设备匹配 interop 兼容性绕过项 [$1]"
+ },
+ {
+  "pattern": "initCsipDeviceIfNeeded: CachedBluetoothDevice\\{anonymizedAddress=([0-9A-Fa-f:]+), name=([^,]+), groupId=.*?\\}",
+  "description": "CSIP设备初始化，地址为 [$1]，名称为 [$2]"
+}
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ]
