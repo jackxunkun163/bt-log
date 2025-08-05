@@ -1,14 +1,230 @@
 [
   {
-    "pattern": "audio_check_.*readyentered",
-    "description": "进入 A2DP 准备检查"
+    "pattern": "BluetoothAdapter: enable()",
+    "description": "Adapter打开蓝牙开关"
   },
   {
-    "pattern": "bt_stack_init",
-    "description": "蓝牙协议栈初始化"
+    "pattern": "BluetoothAdapter: disable()",
+    "description": "Adapter关闭蓝牙开关"
   },
   {
-    "pattern": "connection lost",
-    "description": "连接丢失"
+    "pattern": "BluetoothManagerService: enable",
+    "description": "BluetoothManagerService enable"
+  },
+  {
+    "pattern": "BluetoothManagerService: disable",
+    "description": "BluetoothManagerService disable"
+  },
+  {
+    "pattern": "BluetoothManagerService:.*?Package \\[([^\\]]+)] requested to \\[([^\\]]+)]\\.?\\s+Reason is (\\w+)",
+    "description": "BluetoothManagerService 的操作应用[$1]操作类型[$2]操作原因[$3]"
+  },
+  {
+    "pattern": "BluetoothAdapterService: Loading JNI Library",
+    "description": "AdapterService 加载 bluetooth_jni.so"
+  },
+  {
+	"pattern": "AdapterState:\\s+(\\w+)\\s+:\\s+entered",
+	"description": "AdapterState进入 [$1] 阶段(off<->TurningBle of/off<->Turning on/off<->on)"
+  },
+  {
+   "pattern": "BluetoothManagerService:.*?broadcastIntentStateChange: action=(\\w+) prevState=(\\w+) newState=(\\w+)",
+   "description": "BluetoothManagerService：动作 [$1]，从 [$2] 变为 [$3]"
+  },
+  {
+   "pattern": "AdapterServiceConfig: init: profile=(\\w+), enabled=(\\w+)",
+   "description": "profile [$1] 初始化，启用状态为 [$2]"
+  },
+  {
+    "pattern": "bt_btif\\s*:.*?init: start",
+    "description": "调用satck 初始化"
+  },
+  {
+	"pattern": "bt_core_module:.*?module_start_up: Starting module \\\"([^\"]+)\\\"",
+	"description": "开始启动bt_core模块 [$1]"
+  },
+  {
+	"pattern": "bt_core_module:.*?module_start_up: Started module \\\"([^\"]+)\\\"",
+	"description": "bt_core模块 [$1] 启动完成"
+  },
+  {
+	"pattern": "bt_core_module:.*?module_shut_down: Shutting down module \\\"([^\"]+)\\\"",
+	"description": "开始关闭bt_core模块 [$1]"
+  },
+  {
+	"pattern": "bt_core_module:.*?module_shut_down: Shutdown of module \\\"([^\"]+)\\\" completed",
+	"description": "bt_core模块 [$1] 关闭完成"
+  },
+  {
+	"pattern": "bt_core_module:.*?module_clean_up: Cleaning up module \\\"([^\"]+)\\\"",
+	"description": "开始清理bt_core模块 [$1]"
+  },
+  {
+	"pattern": "bt_core_module:.*?module_clean_up: Cleanup of module \\\"([^\"]+)\\\" completed",
+	"description": "bt_core模块 [$1] 清理完成"
+  },
+  {
+	"pattern": "mtk_bt_init",
+	"description": "MTK BT 库初始化"
+  },
+  {
+	"pattern": "\\[BT\\]\\s*:\\s*mtk_bt_op:\\s*(\\w+)",
+	"description": "调用MTK蓝牙操作 [$1]"
+  },
+  {
+	"pattern": "\\[BT\\]\\s*:\\s*init_uart",
+	"description": "调用MTK蓝牙初始化uart"
+  },
+  {
+	"pattern": "mtk_fw_cfg",
+	"description": "MTK BT FW配置"
+  },
+  {
+	"pattern": "\\[BT\\]\\s*:\\s*print_nv_data:\\s*\\[Radio\\]\\s*((?:0x[0-9A-Fa-f]{2}\\s*)+)",
+	"description": "蓝牙 NV 数据区 [Radio] 功率：$1"
+  },
+  {
+	"pattern": "android\\.hardware\\.bluetooth@aidl-impl:\\s*Open:\\s*VendorInterface::Open\\s+done!!!",
+	"description": "蓝牙 Vendor 接口初始化完成（VendorInterface::Open）"
+  },
+  {
+	"pattern": "\\[BT\\]\\s*:\\s*GORMcmd_HCC_Set_Local_BD_Addr:\\s*Write BD address:\\s*([0-9a-fA-F\\-Xx]+)",
+	"description": "设置本机蓝牙地址为 [$1]"
+  },
+  {
+	"pattern": "BluetoothVendorJni:\\s*classInitNative:\\s*(\\w+)",
+	"description": "BluetoothVendorJni 类初始化状态：[$1]"
+  },
+  {
+	"pattern": "AdapterProperties:.*?maxConnectedAudioDevices, default=(\\d+), propertyOverlayed=(\\d+), finalValue=(\\d+)",
+	"description": "蓝牙最大连接音频设备数：默认 [$1]，覆盖值 [$2]，最终值 [$3]"
+  },
+  {
+	"pattern": "BluetoothBondStateMachine:.*?Entering (\\w+(?:State)?)(?: State)?",
+	"description": "蓝牙Bond状态机进入 [$1] 状态"
+  },
+  {
+	"pattern": "BluetoothBondStateMachine:.*?BONDING_STATE_CHANGE:\\s*(\\d+)reason:\\s*(\\d+)",
+	"description": "蓝牙Bond状态变化：状态码 [$1](11:Bonding,12:Bonded)，原因码 [$2](BOND_SUCCESS)"
+  },
+  {
+	"pattern": "BluetoothBondStateMachine:.*?sendDisplayPinIntent: device=([0-9A-Fa-f:]+), variant=(\\d+)",
+	"description": "蓝牙配对请求，设备地址 [$1]，PIN 显示模式 [$2](PAIRING_VARIANT_CONSENT)"
+  },
+  {
+	"pattern": "bt_btif\\s*:.*?get_profile_interface:\\s*id\\s*=\\s*(\\w+)",
+	"description": "stack初始话profile [$1]"
+  },
+  {
+	"pattern": "BluetoothSystemServer:.*?BluetoothManagerService: storeAddress\\(([0-9A-Fa-f:]+)\\): Success",
+	"description": "存储蓝牙地址成功，地址为 [$1]"
+  },
+  {
+	"pattern": "BluetoothSystemServer:.*?BluetoothManagerService: storeName\\((.+?)\\): Success",
+	"description": "存储蓝牙设备名称成功，名称为 [$1]"
+  },
+  {
+	"pattern": "bt_l2cap:.*?L2CA_Register: L2CAP Registered service classic PSM:\\s*(0x[0-9a-fA-F]+)",
+	"description": "注册 L2CAP Classic 服务，PSM 值为 [$1]"
+  },
+  {
+	"pattern": "gatt_api:.*?GATT_Register_Dynamic: Allocated name:(\\S+)\\s+uuid:([0-9a-fA-F-]+)\\s+gatt_if:(\\d+)\\s+eatt_support:(\\w+)",
+	"description": "注册 GATT 服务 [$1]，UUID 为 [$2]，gatt_if 为 [$3]，EATT 支持：[$4]"
+  },
+  {
+	"pattern": "bt_l2cap:.*?L2CA_RegisterLECoc: Registered service LE COC PSM:\\s*(0x[0-9a-fA-F]+)",
+	"description": "注册 L2CAP LE COC 服务，PSM 值为 [$1]"
+  },
+  {
+	"pattern": "bt_bta_dm:.*?BTA_dm_on_hw_on: Read default class of device \\[(0x[0-9a-fA-F]+), (0x[0-9a-fA-F]+), (0x[0-9a-fA-F]+)\\]",
+	"description": "读取蓝牙默认设备类，值为 [$1, $2, $3]"
+  },
+  {
+	"pattern": "EnableBtQualityReport",
+	"description": "使能BT bqr"
+  },
+  {
+	"pattern": "EnableDisableBtQualityReport",
+	"description": "配置BT bqr"
+  },
+  {
+	"pattern": "EnableDisableBtQualityReport",
+	"description": "配置BT bqr"
+  },
+  {
+	"pattern": "SetPrivacyPolicyForInitiatorAddress: New policy: LeAddressManager::AddressPolicy::(\\w+)\\((0x[0-9a-fA-F]+)\\)",
+	"description": "设置ble 地址隐私策略为 [$1]，策略值为 [$2]"
+  },
+  {
+	"pattern": "SetPrivacyPolicyForInitiatorAddress: minimum_rotation_time_=(\\d+)ms, maximum_rotation_time_=(\\d+)ms",
+	"description": "设置ble 地址轮换时间：最小 [$1]ms，最大 [$2]ms"
+  },
+  {
+	"pattern": "BTM_SecAddDevice: Caching (new|existing) record from config file device: ([0-9a-fA-F:]+), dev_class: (0x[0-9a-fA-F]+), link_key_type: (0x[0-9a-fA-F]+)",
+	"description": "从配置文件缓存 [$1] 设备记录，地址 [$2]，设备类 [$3]，密钥类型 [$4](HCI_LKEY_TYPE_AUTH_COMB)"
+  },
+  {
+	"pattern": "OnCommandComplete: Received command complete with op_code (\\w+)\\((0x[0-9a-fA-F]+)\\)",
+	"description": "收到指令完成事件，指令 [$1]，操作码 [$2]"
+  },
+  {
+	"pattern": "OnCommandComplete: update random address : ([0-9a-fA-F:]+)",
+	"description": "更新本地 LE 随机地址为 [$1]"
+  },
+  {
+	"pattern": "A2dpService: start\\(\\)",
+	"description": "A2DP 服务启动"
+  },
+  {
+	"pattern": "A2dpService: Max connected audio devices set to (\\d+)",
+	"description": "设置 A2DP 最大可连接音频设备数量为 [$1]"
+  },
+  {
+	"pattern": "btif_av.*?Init: Auto flush timeout=(\\d+ms)",
+	"description": "A2DP 自动刷新超时时间设置为 [$1]"
+  },
+  {
+	"pattern": "A2DP_VendorCodecLoadExternalLib: Codec library loaded: ([\\w\\d_]+)",
+	"description": "加载 A2DP Vendor编解码器 [$1]"
+  },
+  {
+	"pattern": "A2dpSoftwareAudioProvider - size of audio buffer (\\d+) byte\\(s\\)",
+	"description": "A2dpSoftwareAudioProvider，音频缓冲区大小为 [$1] 字节"
+  },
+  {
+	"pattern": "bta_av_api_register: AVRCP version used for sdp: (0x[0-9a-fA-F]+)",
+	"description": "通过 SDP 查询到的本机 AVRCP 协议版本为 [$1](AVRC_REV_1_6)"
+  },
+  {
+	"pattern": "A2DP_AddRecord: A2DP_AddRecord, set a2dp ver:(0x[0-9a-fA-F]+)",
+	"description": "本机 A2DP 协议版本为 [$1](AVDT_VERSION)"
+  },
+  {
+	"pattern": "AvrcpConnect: Connect to device ([0-9a-fA-F:]+)",
+	"description": "AVRCP 正在连接设备 [$1](全FF为初始化调用)"
+  },
+  {
+	"pattern": "RegisterBipServer: AVRCP Target Service has registered a BIP OBEX server, psm=(\\d+)",
+	"description": "AVRCP 目标服务已注册 BIP OBEX 服务，PSM 值为 [$1]"
+  },
+  {
+	"pattern": "bta_ag_add_record: features: (\\d+)",
+	"description": "HFP中AG 支持的feature [$1](BTA_AG_FEAT_SWB)"
+  },
+  {
+	"pattern": "iso_impl: (0x[0-9a-fA-F]+) created, iso credits: (\\d+), buffer size: (\\d+)",
+	"description": "创建 ISO 实例 [$1]，ISO credits大小 [$2]，buffer大小 [$3] 字节"
+  },
+  {
+	"pattern": "HearingAidAudioProvider - size of audio buffer (\\d+) byte\\(s\\)",
+	"description": "HearingAid初始化，buffer大小为 [$1] 字节"
+  },
+  {
+	"pattern": "on_create_record_event: Record type= (\\d+)",
+	"description": "创建 SDP record，type为 [$1](SDP_TYPE_MAP_MAS)"
+  },
+  {
+	"pattern": "SDP_SetOPPL2capPSM: SDP_SetOPPL2capPSM add psm (0x[0-9a-fA-F]+)",
+	"description": "为 OPP 服务设置 L2CAP PSM 值为 [$1]"
   }
 ]
