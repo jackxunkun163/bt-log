@@ -302,53 +302,5 @@
  {
 	"pattern": "AvailablePairDeviceGroupController",
 	"description": "AvailablePairDeviceGroupController 页面的状态"
- },
- {
-	"pattern": "BluetoothAdapter: startDiscovery\\(\\) called by (?P<caller>\\S+)",
-	"description": "蓝牙开始startDiscovery，调用者是（${caller}）"
  }
-
-
-
-
-
-
-
-
-
-  
-
-
-  
-
-  
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ]
