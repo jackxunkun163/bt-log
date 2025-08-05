@@ -15,8 +15,9 @@ export function activate(context: vscode.ExtensionContext) {
   const config = vscode.workspace.getConfiguration('logTranslator');
   const remoteUrl = config.get<string>('keywordUrl') || '';
 
-  loadPatternsFromRemote(remoteUrl, context);
-
+  //loadPatternsFromRemote(remoteUrl, context);
+  loadPatternsFromLocal(context);
+  
   context.subscriptions.push(
     vscode.commands.registerCommand('logTranslator.translateLogToFile', async () => {
       if (!vscode.window.activeTextEditor) return;

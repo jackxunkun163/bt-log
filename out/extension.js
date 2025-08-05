@@ -32,7 +32,8 @@ let patterns = [];
 function activate(context) {
     const config = vscode.workspace.getConfiguration('logTranslator');
     const remoteUrl = config.get('keywordUrl') || '';
-    loadPatternsFromRemote(remoteUrl, context);
+    //loadPatternsFromRemote(remoteUrl, context);
+    loadPatternsFromLocal(context);
     context.subscriptions.push(vscode.commands.registerCommand('logTranslator.translateLogToFile', async () => {
         if (!vscode.window.activeTextEditor)
             return;
