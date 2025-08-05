@@ -226,5 +226,129 @@
   {
 	"pattern": "SDP_SetOPPL2capPSM: SDP_SetOPPL2capPSM add psm (0x[0-9a-fA-F]+)",
 	"description": "为 OPP 服务设置 L2CAP PSM 值为 [$1]"
-  }
+  },
+  {
+	"pattern": "btif_update_remote_properties: ([0-9a-fA-F:]+) CoD: (0x[0-9a-fA-F]+) -> (0x[0-9a-fA-F]+)",
+	"description": "更新remote设备 [$1] 的 CoD，从 [$2] 修改为 [$3]"
+  },
+  {
+	"pattern": "handle_remote_properties\\s+device_type=\\s*(\\d+)",
+	"description": "对端设备类型为 [$1](1:br/edr,2:le,3:dual)(结合properties确定设备)"
+  },
+  {
+	"pattern": "init: init attempt to load stack conf from (\\/[^\\s]+)",
+	"description": "蓝牙堆栈配置模块尝试加载配置文件 [$1](modules/Bluetooth/system/conf/)"
+  },
+  {
+	"pattern": "Stack Log Enable: LOG Level=(LOG_\\w+)",
+	"description": "蓝牙堆栈日志等级设为 [$1]"
+  },
+  {
+	"pattern": "is_in_pts_test_mode:(\\d)",
+	"description": "蓝牙堆栈是否处于 PTS 测试模式：[$1]"
+  },
+  {
+	"pattern": "BtGatt\\.ScanController: ScanController\\(\\)",
+	"description": "LE 扫描控制器初始化"
+ },
+ {
+	"pattern": "registerScanner Uid/Pid=(\\d+)/(\\d+)",
+	"description": "注册LE扫描器，UID: [$1]，PID: [$2]"
+ },
+ {
+	"pattern": "startScan Uid/Pid=(\\d+)/(\\d+)",
+	"description": "启动LE扫描，UID: [$1]，PID: [$2]"
+ },
+ {
+	"pattern": "onScanResult\\(\\) - eventType=(0x[0-9a-fA-F]+).*?address=([0-9A-Fa-f:]+).*?rssi=(-?\\d+)",
+	"description": "扫描到设备：eventType=[$1](ADV_SCAN_IND--spec v6.0)，地址=[$2]，RSSI=[$3]dBm"
+ },
+ {
+	"pattern": "stopScan Uid/Pid=(\\d+)/(\\d+)",
+	"description": "停止LE扫描：Uid=[$1]，Pid=[$2]"
+ },
+ {
+	"pattern": "stopScan\\(\\) - queue size =(\\d+)",
+	"description": "停止LE扫描，队列大小为 [$1]"
+ },
+ {
+	"pattern": "unregisterScanner\\(\\) - scannerId=(\\d+)",
+	"description": "注销LE扫描器，scannerId 为 [$1]"
+ },
+ {
+	"pattern": "unregisterScanner Uid/Pid=(\\d+)/(\\d+)",
+	"description": "注销LE扫描器，Uid 为 [$1]，Pid 为 [$2]"
+ },
+ {
+	"pattern": "onScanFilterParamsConfigured\\(\\) - clientIf=(\\d+), status=(\\d+), action=(\\d+), availableSpace=(\\d+)",
+	"description": "LE扫描过滤器配置完成，clientIf=$1，状态=$2，操作=$3，可用空间=$4"
+ },
+ {
+	"pattern": "BtGatt\\.ScanController: stop\\(\\)",
+	"description": "停止LE扫描控制器"
+ },
+ {
+	"pattern": "BtGatt\\.ScanController: stopAllScans\\(\\)",
+	"description": "停止所有LE扫描任务"
+ },
+ {
+	"pattern": "BtGatt\\.ScanController: clearScanController",
+	"description": "清除LE扫描控制器"
+ },
+ {
+	"pattern": "Device record bonded check peer",
+	"description": "检查bond状态"
+ },
+ {
+	"pattern": "AvailablePairDeviceGroupController",
+	"description": "AvailablePairDeviceGroupController 页面的状态"
+ },
+ {
+	"pattern": "BluetoothAdapter: startDiscovery\\(\\) called by (?P<caller>\\S+)",
+	"description": "蓝牙开始startDiscovery，调用者是（${caller}）"
+ }
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ]
