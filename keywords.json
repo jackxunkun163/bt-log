@@ -394,7 +394,531 @@
  {
   "pattern": "initCsipDeviceIfNeeded: CachedBluetoothDevice\\{anonymizedAddress=([0-9A-Fa-f:]+), name=([^,]+), groupId=.*?\\}",
   "description": "CSIP设备初始化，地址为 [$1]，名称为 [$2]"
-}
+ },
+ {
+	"pattern": "bta_dm_search_get_state: search_state=(\\d+)",
+	"description": "获取蓝牙搜索状态，当前状态值为 [$1]"
+ },
+ {
+   "pattern": "createBond: device=([0-9A-Fa-f:]+) transport=(\\d+) from uid/pid=(\\d+)/(\\d+)",
+   "description": "发起配对请求(没配对过)，目标设备地址为 [$1]，传输类型为 [$2](1:TRANSPORT_BREDR)，调用者 Uid 为 [$3]，Pid 为 [$4]"
+ },
+ {
+	"pattern": "btm_process_inq_complete: status=(\\d+) mode=(\\d+)",
+	"description": "蓝牙设备扫描完成，状态码为 [$1]，模式为 [$2](0x01:BTM_GENERAL_INQUIRY )"
+ },
+ {
+	"pattern": "btif_dm_cancel_discovery",
+	"description": "取消蓝牙discovery"
+ },
+ {
+	"pattern": "bond_state_changed: Bond state changed to state=(\\d+)\\[.*?\\],prev_state=(\\d+), sdp_attempts=(\\d+)",
+	"description": "蓝牙配对状态发生变化：NEXT状态为 [$1][0:none, 1:bonding, 2:bonded]，前一状态为 [$2]，sdp_attempts为 [$3]"
+ },
+ {
+	"pattern": "bta_dm_bond: Bonding with peer device:([0-9a-f:]+) type:(\\w+) transport:(\\w+) type:(\\w+)",
+	"description": "开始与设备 [$1] 进行蓝牙配对，地址类型为 [$2]，传输类型为 [$3]，设备类型为 [$4]"
+ },
+ {
+	"pattern": "btm_sec_bond_by_transport: Transport used (\\d+), bd_addr=([0-9a-f:]+)",
+	"description": "使用传输类型 [$1] 与设备 [$2] 发起ssp或者smp加密"
+ },
+ {
+	"pattern": "CreateClassicConnection: Connection initiated for classic to remote:([0-9a-f:]+)",
+	"description": "发起经典蓝牙连接，请求连接到远端设备 [$1]"
+ },
+ {
+	"pattern": "btm_sec_dd_create_conn: Security Manager: ([0-9a-f:]+)",
+	"description": "btm层发起带bond的ACL连接，目标设备地址为 [$1]"
+ },
+ {
+	"pattern": "change_pairing_state: Pairing state changed ([A-Z_]+) => ([A-Z_]+) pairing_flags:0x([0-9a-fA-F]+)",
+	"description": "ACL连接过程page状态发生变化：从 [$1] 状态变为 [$2]，配对标志为 [0x$3]"
+ },
+ {
+	"pattern": "BTM_ReadDevInfo: Determined device_type:([A-Z]+) addr_type:([a-z]+)",
+	"description": "BTM读取设备信息：设备类型为 [$1]，地址类型为 [$2]"
+ },
+ {
+	"pattern": "btm_ble_process_adv_addr: bda=([0-9a-fA-F:]+)",
+	"description": "接收到ble广播地址 [$1]"
+ },
+ {
+	"pattern": "Register: registering acl_queue handle=(\\d+), acl_credits=(\\d+), le_credits=(\\d+)",
+	"description": "ACL连接成功，handle 为 [$1]，ACL credits为 [$2]，LE credits为 [$3]"
+ },
+ {
+	"pattern": "Unregister: unregistering acl_queue handle=(\\d+), sent_packets=(\\d+)",
+	"description": "断开 ACL 连接，handle 为 [$1]，数据包数为 [$2]"
+ },
+ {
+	"pattern": "OnConnectSuccess: Connection successful classic remote:([0-9a-f:]+) handle:(\\d+) initiator:(\\w+)",
+	"description": "经典蓝牙连接成功，远端地址为 [$1]，连接句柄为 [$2]，发起方为 [$3]"
+ },
+ {
+	"pattern": "btm_sec_connected",
+	"description": "经典蓝牙连接状态变化"
+ },
+ {
+	"pattern": "btm_sec_connected: Connected to known device state:(\\w+) handle:0x([0-9a-fA-F]+) status:([A-Z_]+) enc_mode:(\\d+) bda:([0-9a-f:]+) RName:(.+)",
+	"description": "已连接到已知设备，状态为 [$1]，连接句柄为 [0x$2]，状态为 [$3]，加密模式为 [$4]，地址为 [$5]，名称为 [$6]"
+ },
+ {
+	"pattern": "btm_sec_execute_procedure",
+	"description": "鉴权流程的各个阶段"
+ },
+ {
+	"pattern": "StartRemoteNameRequest: Enqueuing remote name request to ([0-9a-f:]+)",
+	"description": "开始发起远程名称请求，目标设备地址为 [$1]"
+ },
+ {
+	"pattern": "actually_start_remote_name_request: Starting remote name request to ([0-9a-f:]+)",
+	"description": "正式开始远程名称请求，目标设备地址为 [$1]"
+ },
+ {
+	"pattern": "btm_acl_role_changed: Role change event received peer:([0-9a-f:]+) hci_status:(\\w+) new_role:(\\w+)",
+	"description": "收到角色变更事件，设备地址为 [$1]，HCI 状态为 [$2]，新角色为 [$3]"
+ },
+ {
+	"pattern": "bta_dm_acl_up: Acl connected peer:([0-9a-f:]+) transport:(\\S+) handle:(\\d+)",
+	"description": "ACL 连接已建立完成，设备地址为 [$1]，传输类型为 [$2]，句柄为 [$3]"
+ },
+ {
+	"pattern": "handle_role_change: Role change callback peer:([0-9a-f:]+) info:0x([0-9a-f]+):([^ ]+) new_role:([^ ]+) dev count:(\\d+) hci_status:(\\S+)",
+	"description": "角色变更回调，peer设备地址为 [$1]，info=0x[$2]([$3])，新角色为 [$4]，当前设备数量 [$5]，HCI 状态为 [$6]"
+ },
+ {
+	"pattern": "btif_update_remote_version_property: Remote version info valid:(\\w+) \\[([0-9a-f:]+)\\]:(0x[0-9a-f]+),(0x[0-9a-f]+),(0x[0-9a-f]+)",
+	"description": "更新远端设备 [$2] 的版本信息，是否有效：[$1]，版本：(lmpVersion=$3, manufacturer=$4, subVersion=$5)"
+ },
+ {
+	"pattern": "process_l2cap_cmd: cmd: (L2CAP_CMD_\\w+), id:(\\d+), cmd_len:(\\d+)",
+	"description": "process L2CAP 命令 [$1]，标识符 id 为 [$2]，命令长度为 [$3] 字节"
+ },
+ {
+	"pattern": "l2c_csm_execute: Enter CSM, chnl_state:(\\w+) \\[(\\d+)\\] event:(\\w+)\\((0x[\\da-fA-F]+)\\) lcid:(0x[\\da-fA-F]+) rcid:(0x[\\da-fA-F]+)",
+	"description": "L2CAP 状态机,当前的状态 [$1($2)]，接收到事件 [$3($4)]，本地通道 CID 为 [$5]，远程通道 CID 为 [$6]"
+ },
+ {
+	"pattern": "l2c_csm_send_config_req: real_psm = \\((0x[\\da-fA-F]+)\\)",
+	"description": "发送 L2CAP 配置请求，真实 PSM 值为 [$1]"
+ },
+ {
+	"pattern": "Received REMOTE_NAME_REQUEST_COMPLETE from ([0-9a-fA-F:]{17}) with status SUCCESS\\(0x00\\)",
+	"description": "从设备 [$1] 成功接收到远程名称请求完成事件（REMOTE_NAME_REQUEST_COMPLETE）"
+ },
+ {
+	"pattern": "btif_on_name_read_from_btm: ([0-9a-fA-F:]{17}) (.+)",
+	"description": "从设备 [$1] 读取到名称 [$2]"
+ },
+ {
+	"pattern": "btif_dm_update_rmt_device_name: Update remote name to storage ([0-9a-fA-F:]{17}) (.+)",
+	"description": "将远程设备 [$1] 的名称更新为 [$2] 并保存到存储"
+ },
+ {
+	"pattern": "btm_sec_auth_timer_timeout: starting authentication",
+	"description": "开始进行蓝牙认证流程"
+ },
+ {
+	"pattern": "btm_sec_link_key_request: bda: ([0-9a-fA-F:]{17})",
+	"description": "收到蓝牙设备 [$1] 的 Link Key 请求"
+ },
+ {
+	"pattern": "btm_io_capabilities_req: State: (\\w+), Security Mode: (\\d+), Device security Flags: (0x[0-9a-fA-F]+)",
+	"description": "io_capabilities请求：状态为 [$1]，安全模式为 [$2]，安全标志为 [$3]"
+ },
+ {
+	"pattern": "btif_dm_proc_io_rsp: auth_req:(\\d+)",
+	"description": "配对流程：接收到 IO 响应，认证请求值为 [$1]"
+ },
+ {
+	"pattern": "l2c_csm_open: LCID: 0x([0-9A-Fa-f]+)\\s+st: ([A-Z_]+)\\s+evt: ([A-Z_]+)\\(0x([0-9A-Fa-f]+)\\)\\s+psm: ([A-Z_]+)\\(0x([0-9A-Fa-f]+)\\)",
+	"description": "L2CAP 信道打开，LCID 为 [$1]，状态为 [$2]，事件为 [$3]，事件码为 [0x$4]，PSM 名称为 [$5]，PSM 值为 [0x$6]"
+ },
+ {
+	"pattern": "l2c_csm_open: Exit chnl_state=([A-Z_]+) \\[(\\d+)\\], event=([A-Z_]+)\\(0x([0-9A-Fa-f]+)\\) \\[(\\d+)\\]",
+	"description": "L2CAP 信道退出，状态为 [$1]([$2])，事件为 [$3]，事件码为 [0x$4]([$5])"
+ },
+ {
+	"pattern": "l2c_csm_open: Calling Disconnect_Ind_Cb\\(\\), CID: (0x[0-9a-fA-F]+)\\s+Conf Needed",
+	"description": "L2CAP 信道 [$1] 断开连接回调调用，需确认（Conf Needed）"
+ },
+ {
+	"pattern": "mtk_set_pbap_sdp_to.*set version to v([\\d\\.]+)",
+	"description": "设置 PBAP SDP 版本为 [$1]"
+ },
+ {
+	"pattern": "PBAP PSE dynamic version upgrade is not enabled",
+	"description": "PBAP PSE 动态版本升级功能未启用"
+ },
+ {
+	"pattern": "BTM_SetPowerMode: Setting power mode for peer:(?P<device>[0-9a-f:]+)",
+	"description": "设置蓝牙设备功耗模式"
+ },
+ {
+	"pattern": "BTM_SetPowerMode: Device is already in requested mode (?P<mode>\\d+), interval: (?P<interval>\\d+), max: (?P<max>\\d+), min: (?P<min>\\d+)",
+	"description": "设备当前已处于指定功耗模式"
+ },
+ {
+	"pattern": "sdp_disconnect_ind: SDP - Rcvd L2CAP disc, process pend sdp ccb: (0x[0-9a-fA-F]+)",
+	"description": "SDP收到L2CAP断开连接请求，待处理的SDP连接控制块标识为 [$1]"
+ },
+ {
+    "pattern": "btm_proc_sp_req_evt: BDA:([0-9a-f:]+), event:(BTM_SP_CFM_REQ_EVT), state:(\\w+)",
+    "description": "发起简化配对确认请求，地址 [$1]，事件类型 [$2]，当前状态 [$3]"
+ },
+ {
+    "pattern": "cfm_req.dev_class = (\\d+-\\d+-\\d+)",
+    "description": "发起简化配对确认请求,远端设备的 Class of Device 为 [$1]"
+ },
+ {
+    "pattern": "num_val:(\\d+)",
+    "description": "发起简化配对确认请求,配对确认码为 [$1]"
+ },
+ {
+    "pattern": "just_works:(\\w+), io loc:(\\d+), rmt:(\\d+), auth loc:(\\d+), rmt:(\\d+)",
+    "description": "发起简化配对确认请求,JustWorks 模式: [$1], 本地IO能力: [$2], 远端IO能力: [$3], 本地认证需求: [$4], 远端认证需求: [$5]"
+ },
+ {
+    "pattern": "bta_dm_sp_cback",
+    "description": "simple pair的callback"
+ },
+ {
+    "pattern": "btif_dm_ssp_cfm_req_evt: addr:([0-9a-f:]+), CoD: ([0-9-]+), just_works:(\\w+), loc_auth_req=(\\d+), rmt_auth_req=(\\d+)",
+    "description": "SSP配对确认请求：地址 [$1]，CoD=[$2]，JustWorks模式=[$3]，本地认证请求等级=[$4]，远端认证请求等级=[$5]"
+ },
+ {
+	"pattern": "setPairingConfirmation: device=([0-9A-F:]+), accept=(\\w+), from uid/pid=(\\d+)/(\\d+)",
+	"description": "用户配对确认：设备地址 [$1]，是否接受=[$2]，Uid=[$3]，Pid=[$4]"
+ },
+ {
+	"pattern": "btif_dm_auth_cmpl_evt: bond state=(\\d+), success=(true|false), key_present=(true|false)",
+	"description": "蓝牙配对完成：bond_state=[$1]，配对是否成功=[$2]，密钥是否存在=[$3]"
+ },
+ {
+	"pattern": "Storing link key\\. key_type=(0x[0-9a-f]+), bond_type=(\\d+)",
+	"description": "配对完成后存储密钥：key_type=[$1]，bond_type=[$2]"
+ },
+ {
+	"pattern": "scheduling SDP for ([0-9A-Fa-f:]{17})",
+	"description": "配对完成后发起 SDP 服务发现：目标设备地址 [$1]"
+ },
+ {
+	"pattern": "bta_dm_disc_sm_execute: state:([A-Z_]+), event:([A-Z_]+\\[[^\\]]+\\])",
+	"description": "发现状态机：状态 [$1]，事件 [$2]"
+ },
+ {
+	"pattern": "bta_dm_discover_services: starting service discovery to: ([0-9A-Fa-f:]+), transport: ([A-Z_]+)",
+	"description": "开始服务发现：设备地址=[$1]，传输方式=[$2]"
+ },
+ {
+	"pattern": "bta_dm_discover_services: starting SDP discovery on ([0-9A-Fa-f:]+)",
+	"description": "开始 SDP 服务发现：设备地址=[$1]"
+ },
+ {
+	"pattern": "bta_dm_sdp_find_services: services_to_search=([0-9a-fA-F]+)",
+	"description": "SDP 服务发现：待搜索服务掩码=[$1]"
+ },
+ {
+	"pattern": "bta_dm_sdp_find_services: search UUID = ([0-9a-fA-F\\-]+)",
+	"description": "SDP 服务发现：搜索 UUID=[$1]"
+ },
+ {
+	"pattern": "l2c_csm_send_config_req: real_psm = \\(0x([0-9a-fA-F]+)\\)",
+	"description": "L2CAP 配置请求：PSM=[$1]"
+ },
+ {
+	"pattern": "L2CA_DisconnectReq: L2CAP Local disconnect request CID: 0x([0-9a-fA-F]+)",
+	"description": "本地发起 L2CAP 断开连接请求：通道 ID = [$1]"
+ },
+ {
+	"pattern": "connectEnabledProfiles: Connecting ([\\w ]+)",
+	"description": "连接蓝牙Profiles：[$1]"
+ },
+ {
+	"pattern": "connectHfpNative: device ([0-9A-Fa-f:]+)",
+	"description": "尝试连接 HFP 设备，地址=[$1]"
+ },
+ {
+	"pattern": "ConnectionStateCallback: (\\d+) for ([0-9A-Fa-f:]+)",
+	"description": "HFP 连接状态变化：状态码=[$1]，设备地址=[$2]"
+ },
+ {
+	"pattern": "cleanupNative: Cleaning up Bluetooth Handsfree Interface",
+	"description": "清理 Bluetooth Handsfree 接口资源"
+ },
+ {
+	"pattern": "cleanupNative: Cleaning up Bluetooth Handsfree callback object",
+	"description": "清理 Bluetooth Handsfree 回调对象"
+ },
+ {
+	"pattern": "enableSwbNative: Failed to disable",
+	"description": "enable SWB（Super Wide Band）失败"
+ },
+ {
+	"pattern": "RFCOMM_CreateConnectionWithSecurity: bd_addr=([0-9A-Fa-f:]+), scn=(\\d+), is_server=(\\w+), mtu=(\\d+), uuid=0x([0-9a-fA-F]+), dlci=(\\d+), signal_state=0x([0-9a-fA-F]+), p_port=0x([0-9a-fA-F]+)",
+	"description": "RFCOMM 连接建立：地址=[$1]，SCN=[$2]，是否服务器=[$3]，MTU=[$4]，UUID=[$5]，DLCI=[$6]，信令状态=[$7]，端口指针=[$8]"
+ },
+ {
+	"pattern": "PORT_SetEventMaskAndCallback: handle:(\\d+) mask:0x([0-9a-fA-F]+)",
+	"description": "设置端口事件回调：句柄=[$1]，掩码=[$2]"
+ },
+ {
+	"pattern": "PORT_ReadData: handle:(\\d+) max_len:(\\d+)",
+	"description": "读取 RFCOMM 数据请求：句柄=[$1]，最大长度=[$2]"
+ },
+ {
+	"pattern": "PORT_ReadData: queue:(\\d+) returned:(\\d+)",
+	"description": "RFCOMM 数据读取返回：队列=[$1]，返回长度=[$2]"
+ },
+ {
+	"pattern": "PORT_WriteData: max_len:(\\d+)",
+	"description": "准备写入 RFCOMM 数据：最大长度=[$1]"
+ },
+ {
+	"pattern": "PORT_WriteData: (\\d+) bytes",
+	"description": "已写入 RFCOMM 数据：[$1] 字节"
+ },
+ {
+	"pattern": "port_write: Data is being sent",
+	"description": "RFCOMM 正在发送数据"
+ },
+ {
+	"pattern": "RFCOMM_RemoveConnection\\(\\) handle:(\\d+)",
+	"description": "移除 RFCOMM 连接：句柄=[$1]"
+ },
+ {
+	"pattern": "RFCOMM_RemoveServer: handle=(\\d+)",
+	"description": "移除 RFCOMM 服务器：句柄=[$1]"
+ },
+ {
+	"pattern": "rfc_mx_sm_execute: RFCOMM peer:([0-9A-Fa-f:]+) event:(\\w+) state:(\\w+)",
+	"description": "RFCOMM 状态机执行：对端地址=[$1]，事件=[$2]，当前状态=[$3]"
+ },
+ {
+	"pattern": "bta_dm_pm_ssr: Found connected service:(\\w+) app_id:(\\d+) peer:([0-9A-Fa-f:]+) spec_name:(\\w+)",
+	"description": "HCI Sniff Subrating服务：服务类型=[$1]，AppID=[$2]，对端地址=[$3]，规格=[$4]"
+ },
+ {
+	"pattern": "BTM_SetSsrParams: Set sniff subrating state:immediate:active\\[(\\d+)\\] max_latency:(0x[0-9a-fA-F]+) min_remote_timeout:(0x[0-9a-fA-F]+) min_local_timeout:(0x[0-9a-fA-F]+)",
+	"description": "设置 HCI Sniff Subrating 参数：active状态=[$1]，最大延迟=[$2]，远端最小超时=[$3]，本地最小超时=[$4]"
+ },
+ {
+	"pattern": "connectHfpNative: device ([0-9a-fA-F:]+)",
+	"description": "发起 HFP 连接：目标设备地址为 [$1]"
+ },
+ {
+	"pattern": "ConnectionStateCallback: (\\d+) for ([0-9a-fA-F:]+)",
+	"description": "HFP 连接状态回调：状态码=[$1]，设备地址=[$2]"
+ },
+ {
+	"pattern": "cleanupNative: Cleaning up Bluetooth Handsfree Interface",
+	"description": "清理蓝牙HFP接口"
+ },
+ {
+	"pattern": "cleanupNative: Cleaning up Bluetooth Handsfree callback object",
+	"description": "清理蓝牙HFP回调对象"
+ },
+ {
+	"pattern": "SDP_SetOPPL2capPSM: SDP_SetOPPL2capPSM add psm (0x[0-9a-fA-F]+)",
+	"description": "SDP 设置 OPP 使用的 L2CAP PSM 为 [$1]"
+ },
+ {
+	"pattern": "SDP_GetOPPL2capPSM: SDP_GetOPPL2capPSM psm (0x[0-9a-fA-F]+)",
+	"description": "SDP 获取 OPP 使用的 L2CAP PSM 为 [$1]"
+ },
+ {
+	"pattern": "RemoveServiceByPsm: psm:(0x[0-9a-fA-F]+) num_freed:(\\d+)",
+	"description": "释放服务：PSM=[$1]，释放数量=[$2]"
+ },
+ {
+	"pattern": "L2CA_Deregister: L2CAP - L2CA_Deregister\\(\\) called for PSM: (0x[0-9a-fA-F]+)",
+	"description": "注销 L2CAP 服务，PSM 为 [$1]"
+ },
+ {
+	"pattern": "l2c_csm_closed: LCID: (0x[0-9a-fA-F]+)\\s+st: (\\w+)\\s+evt: L2CEVT_SEC_COMP\\(0x([0-9a-fA-F]+)\\) psm: \\w+\\((0x[0-9a-fA-F]+)\\)",
+	"description": "接收到l2cap close事件：LCID事件：LCID=[$1]，状态=[$2]，事件码=[$3]，PSM=[$4]"
+ },
+ {
+	"pattern": "Exit chnl_state=(\\w+) \\[\\d+\\], event=L2CEVT_(\\w+)\\(0x([0-9a-fA-F]+)\\) \\[\\d+\\]",
+	"description": "退出l2cap状态机：状态机：状态=[$1]，事件=[$2]，事件码=[$3]"
+ },
+ {
+	"pattern": "bta_ag_at_hfp_cback: AT command (\\d+), arg_type (\\d+), int_arg (\\d+), arg (.+)",
+	"description": "提取 AT 命令参数：command=[$1], arg_type=[$2], int_arg=[$3], arg=[$4]"
+ },
+ {
+	"pattern": "FindOrCreatePeer: Create peer: peer_address=([0-9a-fA-F:]+) bta_handle=0x([0-9a-fA-F]+) peer_id=(\\d+)",
+	"description": "A2DP 创建或查找 peer 设备：address=[$1], handle=[$2], peer_id=[$3]"
+ },
+ {
+	"pattern": "AllowedToConnect: connected=(\\d+), max_connected_peers_=(\\d+), sink_connected_peers_size=(\\d+)",
+	"description": "是否允许 A2DP 连接：当前连接数=[$1]，最大连接数=[$2]，已连接 sink 数=[$3]"
+ },
+ {
+	"pattern": "btif_report_connection_state: peer_address=([0-9a-fA-F:]+) state=(\\d+)",
+	"description": "A2DP 连接状态变化：设备 [$1]，状态码 [$2]"
+ },
+ {
+	"pattern": "bta_av_ssm_execute: peer ([0-9A-Fa-f:]+) p_scb=0x[0-9a-fA-F]+\\([^)]+\\) AV event=0x([0-9a-fA-F]+)\\(([^)]+)\\) state=(\\d+)\\(([^)]+)\\)( -> (\\d+)\\(([^)]+)\\))?",
+	"description": "A2DP 状态机执行：设备 [$1]，事件 [$3] (0x$2)，当前状态 [$5] ($4){{，变更为状态 [$8] ($7)}}"
+ },
+ {
+	"pattern": "bta2dp_connection_state_callback: ([0-9A-Fa-f:]+): state: (BTAV_CONNECTION_STATE_[A-Z_]+)",
+	"description": "A2DP 连接状态回调：设备 [$1] 状态 [$2]"
+ },
+ {
+	"pattern": "A2DP_FindService: A2DP service discovery for peer ([0-9A-Fa-f:]+) UUID (0x[0-9a-fA-F]+): SDP search started",
+	"description": "A2DP 服务发现启动：目标设备 [$1]，UUID 为 [$2]"
+ },
+ {
+	"pattern": "bta_ag_api_set_active_device: active_device_addr([0-9A-Fa-f:]+), new_active_device:([0-9A-Fa-f:]+)",
+	"description": "设置 SCO 活跃设备：当前设备地址 [$1]，新的活跃设备地址 [$2]"
+ },
+ {
+	"pattern": "get AudioManager SCO volume = (\\d+); mSpeakerVolume =(\\d+)",
+	"description": "获取音频参数：SCO 音量 = [$1]，扬声器音量 = [$2]"
+ },
+ {
+	"pattern": "SetAvdtpVersion: AVDTP version for ([0-9A-Fa-f:]+) set to (0x[0-9A-Fa-f]+)",
+	"description": "设置 AVDTP 版本：设备地址=[$1]，版本=[$2]"
+ },
+ {
+	"pattern": "AVDT_ConnectReq: completed; bd_addr=([0-9A-Fa-f:]+) result=(\\d+)",
+	"description": "AVDT 连接请求完成：设备地址=[$1]，结果=[$2]"
+ },
+  {
+    "pattern": "connectA2dpNative: ([0-9A-Fa-f:]+)",
+    "description": "发起 A2DP 连接请求，设备地址=[$1]"
+  },
+  {
+    "pattern": "bta2dp_mandatory_codec_preferred_callback: ([0-9A-Fa-f:]+)",
+    "description": "A2DP 编解码器优选回调，设备地址=[$1]"
+  },
+  {
+    "pattern": "bta2dp_connection_state_callback: ([0-9A-Fa-f:]+): state: (\\w+)",
+    "description": "A2DP 连接状态回调，设备地址=[$1]，状态=[$2]"
+  },
+  {
+    "pattern": "AVDT_ConnectReq: bd_addr=([0-9A-Fa-f:]+) channel_index=(\\d+)",
+    "description": "AVDTP 连接请求：设备地址=[$1]，通道索引=[$2]"
+  },
+  {
+    "pattern": "AVDT_ConnectReq: completed; bd_addr=([0-9A-Fa-f:]+) result=(\\d+)",
+    "description": "AVDTP 连接完成：设备地址=[$1]，结果=[$2]"
+  },
+  {
+    "pattern": "AVDT_DiscoverReq: bd_addr=([0-9A-Fa-f:]+) channel_index=(\\d+)",
+    "description": "AVDTP 服务发现请求：设备地址=[$1]，通道索引=[$2]"
+  },
+  {
+    "pattern": "AVDT_GetCapReq: bd_addr=([0-9A-Fa-f:]+) channel_index=(\\d+) seid=0x([0-9A-Fa-f]+) get_all_capabilities=(\\w+)",
+    "description": "AVDTP 获取能力请求：设备地址=[$1]，通道索引=[$2]，SEID=[$3]，获取全部能力=[$4]"
+  },
+  {
+    "pattern": "AVDT_OpenReq: bd_addr=([0-9A-Fa-f:]+) avdt_handle=(\\d+) seid=0x([0-9A-Fa-f]+)",
+    "description": "AVDTP 打开流请求：设备地址=[$1]，句柄=[$2]，SEID=[$3]"
+  },
+  {
+    "pattern": "bta2dp_audio_config_callback: ([0-9A-Fa-f:]+): codec: ([^,]+), local codecs: ([^,]+(?:, [^,]+)*), selectable codecs: ([^\\n]+)",
+    "description": "A2DP 音频配置回调：设备地址=[$1]，当前编解码器=[$2]，本地支持=[$3]，可选编解码器=[$4]"
+  },
+  {
+    "pattern": "setActiveDeviceNative: ([0-9A-Fa-f:]{2}(:[0-9A-Fa-f:]{2}){5})",
+    "description": "设置 A2DP 活跃设备：设备地址=[$1]"
+  },
+  {
+    "pattern": "AVDT_CloseReq: avdt_handle=(\\d+)",
+    "description": "AVDTP 关闭请求：句柄=[$1]"
+  },
+  {
+    "pattern": "AVDT_RemoveStream: avdt_handle=(\\d+)",
+    "description": "移除 AVDTP 流：句柄=[$1]"
+  },
+  {
+    "pattern": "AVDT_DisconnectReq: bd_addr=([0-9A-Fa-f:]+)",
+    "description": "AVDTP 断开连接请求：设备地址=[$1]"
+  },
+  {
+    "pattern": "AVDT_DisconnectReq: Sending disconnect request to ccb peer:([0-9A-Fa-f:]+)",
+    "description": "向 peer [$1] 发送 AVDTP 断连请求"
+  },
+  {
+    "pattern": "SDP Completed features=0x([0-9A-Fa-f]+)",
+    "description": "AVRCP SDP 完成，功能位=0x[$1]"
+  },
+  {
+    "pattern": "AvrcpConnect: Connect to device ([0-9A-Fa-f:]+)",
+    "description": "AVRCP 开始连接设备：地址=[$1]"
+  },
+  {
+    "pattern": "AvrcpConnect: handle=0x([0-9A-Fa-f]+) status= *([0-9A-Fa-f]+)",
+    "description": "AVRCP 连接完成：句柄=0x[$1]，状态=[$2]"
+  },
+  {
+    "pattern": "InitiatorControlCb: handle=0x([0-9A-Fa-f]+) result=([0-9A-Fa-f]+) addr=([0-9A-Fa-f:]+)",
+    "description": "AVRCP 控制连接回调：句柄=0x[$1]，结果=[$2]，地址=[$3]"
+  },
+  {
+    "pattern": "InitiatorControlCb: Connection Opened Event",
+    "description": "AVRCP 控制连接已建立"
+  },
+  {
+    "pattern": "deviceConnected: device=([0-9A-Fa-f:]+) absoluteVolume=true",
+    "description": "AVRCP 设备连接：地址=[$1]，支持绝对音量"
+  },
+  {
+    "pattern": "switchVolumeDevice: Set Absolute volume support to true",
+    "description": "设置 AVRCP 绝对音量支持为 true"
+  },
+  {
+    "pattern": "getVolume: Couldn't find volume preference for device: ([0-9A-Fa-f:]+)",
+    "description": "未找到设备 [$1] 的音量偏好设置"
+  },
+  {
+    "pattern": "switchVolumeDevice: savedVolume=([0-9]+)",
+    "description": "已保存音量值为 [$1]"
+  },
+  {
+    "pattern": "setAvrcpAbsoluteVolumeSupported supported=true",
+    "description": "系统设置：AVRCP 支持绝对音量"
+  },
+  {
+    "pattern": "setAvrcpAbsoluteVolumeSupported support true",
+    "description": "音频服务设置：AVRCP 支持绝对音量"
+  },
+  {
+    "pattern": "switchVolumeDevice: Updating device volume: avrcpVolume=([0-9]+)",
+    "description": "更新设备音量为 [$1]"
+  },
+  {
+    "pattern": "sendVolumeChanged: volume=([0-9]+)",
+    "description": "通过 AVRCP 发送音量变化：[$1]"
+  }
+  
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
 
 
 
